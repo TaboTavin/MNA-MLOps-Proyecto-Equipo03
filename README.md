@@ -1,5 +1,18 @@
 # Clasificación de Emociones en Música Turca Tradicional
 
+**Tecnológico de Monterrey**
+
+**Maestría en Inteligencia Artificial Aplicada**  
+**Curso:** Machine Learning Operations
+
+---
+
+**Integrantes: Equipo 03**
+- David Alejandro Velázquez Valdéz A01632648
+- Christian Gustavo Martínez Ramírez A01796999
+- César Gustavo Lopez Zamarripa A00967602
+- Daniel Vinicio Espinosa Herrera A01796585
+
 ## Descripción del Proyecto
 Este proyecto forma parte de la materia de MLOps y tiene como objetivo aplicar un flujo completo de ciencia de datos con buenas prácticas de versionado de código y datos.
 
@@ -11,7 +24,7 @@ Clasificar piezas musicales según la emoción que transmiten (ej. *happy, sad, 
 ---
 
 ## Estructura del repositorio
-
+```
 MNA-MLOps-Proyecto-Equipo03/
 │
 ├── data/                # Datasets (DVC)
@@ -34,7 +47,7 @@ MNA-MLOps-Proyecto-Equipo03/
 ├── .gitignore
 ├── .dvcignore
 └── README.md
-
+```
 ---
 
 ## Configuración del entorno
@@ -49,25 +62,26 @@ git clone https://github.com/TaboTavin/MNA-MLOps-Proyecto-Equipo03.git
 cd MNA-MLOps-Proyecto-Equipo03
 
 ### 2. Crear entorno con conda
+
 conda env create -f environment.yml
 conda activate MNA-MLOps-Proyecto-Equipo03
 
 ### 3. Descargar datos con DVC
-dvc pull
+dvc pull 
+```
 
----
+## Dataset
+- **Nombre:** Turkish Music Emotion Dataset
+- **Fuente:** UCI Machine Learning Repository
+- **Descripción:** características de audio extraídas de música turca tradicional.
+- **Tipos de variables**
+	- Spectral features: centroid, rolloff, flux, spread.
+	- Rhythmic features: tempo, beats.
+	- MFCCs: coeficientes 1–13.
+	- Chroma features: energía por pitch.
+	- Emotion label: clase objetivo (ej. happy, sad, angry, relaxed).
 
-### Dataset
-	•	Nombre: Turkish Music Emotion Dataset
-	•	Fuente: UCI Machine Learning Repository
-	•	Descripción: características de audio extraídas de música turca tradicional.
-	•	Tipos de variables:
-	•	Spectral features: centroid, rolloff, flux, spread.
-	•	Rhythmic features: tempo, beats.
-	•	MFCCs: coeficientes 1–13.
-	•	Chroma features: energía por pitch.
-	•	Emotion label: clase objetivo (ej. happy, sad, angry, relaxed).
+## Versionado de datos con DVC
 
-Versionado de datos con DVC:
-	•	data/dataset_raw.csv → versión original.
-	•	data/dataset_clean.csv → versión procesada para modelado.
+- data/dataset_raw.csv → versión original.
+- data/dataset_clean.csv → versión procesada para modelado.
