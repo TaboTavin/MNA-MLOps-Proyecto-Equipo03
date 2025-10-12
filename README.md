@@ -12,6 +12,7 @@
 - Christian Gustavo Martínez Ramírez A01796999
 - César Gustavo Lopez Zamarripa A00967602
 - Daniel Vinicio Espinosa Herrera A01796585
+- Marcelo Alanis Alvarez A01796009
 
 ## Descripción del Proyecto
 Este proyecto forma parte de la materia de MLOps y tiene como objetivo aplicar un flujo completo de ciencia de datos con buenas prácticas de versionado de código y datos.
