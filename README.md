@@ -28,25 +28,40 @@ Clasificar piezas musicales según la emoción que transmiten (ej. *happy, sad, 
 ```
 MNA-MLOps-Proyecto-Equipo03/
 │
-├── data/                # Datasets (DVC)
-│   └── README.md
+├── data/                          # Datasets (DVC)
+│   ├── turkis_music_emotion_original.csv
+│   ├── turkish_music_emotion_cleaned.csv
+│   └── turkish_music_emotion_modified.csv
 │
-├── notebooks/            # Notebooks de exploración y pruebas
+├── notebooks/                     # Notebooks de exploración y análisis
+│   ├── EDA_Inicial.ipynb
+│   ├── EDA_Final.ipynb
+│   ├── Transformacion_de_Datos.ipynb
+│   └── 01_model_construction.ipynb
 │
-├── src/                  # Código fuente
-│   ├── data_preprocessing.py
-│   ├── train_model.py
-│   └── utils.py
+├── src/                           # Código fuente modular
+│   ├── data/
+│   │   └── make_dataset.py
+│   ├── features/
+│   │   └── build_features.py
+│   ├── models/
+│   │   ├── train_model.py
+│   │   └── predict_model.py
+│   ├── visualization/
+│   │   └── visual.py
+│   ├── transformers.py            # Transformadores sklearn
+│   ├── sklearn_pipeline.py        # Pipeline de entrenamiento
+│   ├── experiment_runner.py       # Ejecución de experimentos
+│   └── pipeline.py                # Interfaz simplificada
 │
-├── models/               # Modelos entrenados (DVC)
+├── models/                        # Modelos entrenados
 │
-├── reports/              # Resultados (EDA, gráficas, tablas, métricas)
+├── reports/                       # Resultados y visualizaciones
 │
-├── requirements.txt      # Dependencias con pip
-├── environment.yml       # Entorno reproducible con conda
-├── dvc.yaml              # Pipeline de DVC 
-├── .gitignore
-├── .dvcignore
+├── mlflow_manager.py              # Gestión de MLflow
+├── main.py                        # Orquestador principal
+├── environment.yml                # Entorno conda
+├── Makefile                       # Comandos automatizados
 └── README.md
 ```
 ---
@@ -84,5 +99,66 @@ dvc pull
 
 ## Versionado de datos con DVC
 
-- data/dataset_raw.csv → versión original.
-- data/dataset_clean.csv → versión procesada para modelado.
+- `data/turkis_music_emotion_original.csv` → versión original del dataset.
+- `data/turkish_music_emotion_cleaned.csv` → versión limpia para modelado.
+- `data/turkish_music_emotion_modified.csv` → versión con transformaciones adicionales.
+
+---
+
+## Arquitectura del proyecto
+
+### Pipeline de Machine Learning
+El proyecto implementa un pipeline completo con las siguientes etapas:
+
+1. **Transformación de datos** (`src/transformers.py`)
+   - `DataCleanerTransformer`: Limpieza de valores inválidos
+   - `NumericConverterTransformer`: Conversión a formato numérico
+   - `CustomImputerTransformer`: Imputación de valores faltantes
+
+2. **Entrenamiento de modelos** (`src/sklearn_pipeline.py`)
+   - Pipeline de scikit-learn con preprocesamiento integrado
+   - Registro automático de métricas en MLflow
+   - Evaluación con accuracy, precision, recall y F1-score
+
+3. **Experimentación** (`src/experiment_runner.py`)
+   - Configuraciones de modelos: Random Forest, Gradient Boosting, Logistic Regression, SVM, Decision Tree
+   - Tuning de hiperparámetros con 5 configuraciones por modelo
+   - Eliminación de código duplicado mediante Factory Pattern
+
+4. **Tracking con MLflow** (`mlflow_manager.py`)
+   - Registro de experimentos y ejecuciones
+   - Comparación de modelos y métricas
+   - Model Registry para versionado de modelos
+
+5. **Visualización** (`src/visual.py`)
+   - Gráficas comparativas de modelos
+   - Radar charts para análisis multimétrico
+   - Evolución temporal de experimentos
+
+### Orquestador principal
+El archivo `main.py` coordina todo el flujo mediante la clase `MLExperimentOrchestrator`.
+
+---
+
+## Ejecución del proyecto
+
+### Ejecutar experimentos
+El script principal entrena múltiples modelos y registra resultados en MLflow:
+
+```bash
+python main.py
+```
+
+**¿Qué hace `main.py`?**
+- Carga y preprocesa el dataset de emociones musicales
+- Entrena 5 modelos base (Random Forest, Gradient Boosting, Logistic Regression, SVM, Decision Tree)
+- Registra métricas (accuracy, precision, recall, F1-score) en MLflow
+- Genera visualizaciones comparativas en `reports/`
+- Registra el mejor modelo en MLflow Model Registry
+- Exporta tabla de métricas a CSV
+
+**Resultados generados:**
+- Archivo CSV con métricas en `reports/music_emotion_classification_metrics.csv`
+- Gráficas PNG en `reports/` (comparación de modelos, evolución temporal, radar chart)
+- Modelos registrados en `mlruns/`
+
