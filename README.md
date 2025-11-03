@@ -76,11 +76,34 @@ O en terminal:
 ```bash
 git clone https://github.com/TaboTavin/MNA-MLOps-Proyecto-Equipo03.git
 cd MNA-MLOps-Proyecto-Equipo03
+```
 
-### 2. Crear entorno con conda
+### 2. Crear entorno virtual
 
-conda env create -f environment.yml
-conda activate MNA-MLOps-Proyecto-Equipo03
+**Con Python venv:**
+```bash
+# Crear entorno virtual
+python -m venv venv
+
+# Activar entorno virtual
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/macOS
+
+# Instalar dependencias
+pip install -r requirements.txt
+```
+
+**Con conda:**
+```bash
+# Crear entorno virtual
+conda create -n music-emotion python=3.11
+
+# Activar entorno virtual
+conda activate music-emotion
+
+# Instalar dependencias
+pip install -r requirements.txt
+```
 
 ### 3. Descargar datos con DVC
 dvc pull 
