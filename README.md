@@ -185,3 +185,57 @@ python main.py
 - Gráficas PNG en `reports/` (comparación de modelos, evolución temporal, radar chart)
 - Modelos registrados en `mlruns/`
 
+---
+
+## Pruebas automatizadas
+
+El proyecto implementa pruebas unitarias y de integración con pytest para validar el funcionamiento del pipeline.
+
+### Estructura de pruebas
+```
+tests/
+├── conftest.py                    # Fixtures compartidas
+├── test_transformers.py           # Pruebas de transformadores
+├── test_sklearn_pipeline.py       # Pruebas del pipeline
+├── test_experiment_runner.py      # Pruebas del orquestador
+├── test_integration.py            # Pruebas end-to-end
+├── test_metrics.py                # Pruebas de métricas
+└── test_mlflow_integration.py     # Pruebas de MLflow
+```
+
+### Ejecutar pruebas
+
+**Instalación de pytest (primera vez):**
+```bash
+pip install pytest pytest-cov
+```
+
+**Ejecutar todas las pruebas:**
+```bash
+pytest -q
+```
+
+**Ejecutar con detalle:**
+```bash
+pytest -v
+```
+
+**Ejecutar con cobertura de código:**
+```bash
+pytest --cov=src --cov-report=html --cov-report=term
+```
+
+**Ejecutar pruebas específicas:**
+```bash
+pytest tests/test_transformers.py -v
+```
+
+Las pruebas cubren:
+- Transformadores de datos (limpieza, conversión numérica, imputación)
+- Pipeline de entrenamiento completo
+- Cálculo de métricas (accuracy, precision, recall, F1-score)
+- Integración con MLflow (logging de parámetros, métricas y modelos)
+- Flujo end-to-end (carga de datos, preprocesamiento, entrenamiento, predicción)
+
+Para más detalles, consulta la documentación en `tests/testing.md`.
+
