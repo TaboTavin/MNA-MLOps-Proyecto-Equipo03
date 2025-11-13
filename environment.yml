@@ -41,6 +41,10 @@ dependencies:
       - matplotlib==3.10.6
       - seaborn==0.13.2
       
+      # Testing
+      - pytest==8.3.4
+      - pytest-cov==6.0.0
+      
       # DVC y versionado
       - dvc==3.63.0
       - dvc-data==3.16.12
