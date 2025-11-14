@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # URI del modelo MLflow
+      - MLFLOW_MODEL_URI=models:/best_model/latest
+      # URI del servidor de tracking MLflow
+      # Tal vez esto no lo necesitamos
+      - MLFLOW_TRACKING_URI=http://mlflow-server:5000
+    volumes:
+      # Volumen para modelos locales
+      - ./models:/app/models
+    restart: unless-stopped
