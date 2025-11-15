@@ -379,16 +379,3 @@ pytest -n auto
 - [Best Practices for Testing ML Code](https://madewithml.com/courses/mlops/testing/)
 
 ---
-
-## Checklist de Testing
-
-- Pruebas unitarias de transformadores
-- Pruebas unitarias de métricas
-- Pruebas de integración del pipeline
-- Pruebas E2E del flujo completo
-- Pruebas de integración con MLflow
-- Fixtures compartidas en conftest.py
-- Documentación completa
-- CI/CD integración (próximo paso)
-
----

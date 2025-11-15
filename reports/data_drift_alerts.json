@@ -1,0 +1,37 @@
+{
+  "status": "alert",
+  "performance_drop": 0.121588,
+  "performance_drop_threshold": 0.05,
+  "baseline_accuracy": 0.955335,
+  "monitoring_accuracy": 0.833747,
+  "flagged_features": [
+    "_RMSenergy_Mean",
+    "_Lowenergy_Mean",
+    "_Tempo_Mean",
+    "_Pulseclarity_Mean",
+    "_Spectralcentroid_Mean",
+    "_Spectralspread_Mean",
+    "_Spectralflatness_Mean",
+    "_Chromagram_Mean_1",
+    "_Chromagram_Mean_2",
+    "_Chromagram_Mean_3",
+    "_Chromagram_Mean_4",
+    "_Chromagram_Mean_5",
+    "_Chromagram_Mean_6",
+    "_Chromagram_Mean_7",
+    "_Chromagram_Mean_8",
+    "_Chromagram_Mean_9",
+    "_Chromagram_Mean_11",
+    "_Chromagram_Mean_12",
+    "_HarmonicChangeDetectionFunction_Mean",
+    "_HarmonicChangeDetectionFunction_Std",
+    "_HarmonicChangeDetectionFunction_PeriodFreq",
+    "_HarmonicChangeDetectionFunction_PeriodAmp",
+    "_HarmonicChangeDetectionFunction_PeriodEntropy"
+  ],
+  "ks_alpha": 0.05,
+  "recommended_actions": [
+    "Re-entrenar el modelo con datos recientes.",
+    "Revisar distribuci\u00f3n de features con drift y actualizar el pipeline de preprocesamiento."
+  ]
+}
