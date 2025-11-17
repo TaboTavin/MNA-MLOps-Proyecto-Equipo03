@@ -502,3 +502,103 @@ La API maneja los siguientes casos:
 - Errores de predicción (500)
 - Campos faltantes o incorrectos (422)
 
+---
+
+## Despliegue con Docker
+
+### Prerequisitos
+- Docker instalado en tu sistema
+- Git para clonar el repositorio
+
+### Construcción de la imagen Docker
+
+**1. Clonar el repositorio:**
+```bash
+git clone https://github.com/TaboTavin/MNA-MLOps-Proyecto-Equipo03.git
+cd MNA-MLOps-Proyecto-Equipo03
+```
+
+**2. Construir la imagen Docker:**
+```bash
+docker build -t music-emotion-api .
+```
+
+### Ejecutar el contenedor
+
+**Ejecutar en segundo plano (detached) con volumen persistente:**
+```bash
+docker run -d -p 8000:8000 -v mlruns_data:/app/mlruns --name music-emotion-container music-emotion-api
+```
+
+**Verificar que el contenedor está ejecutándose:**
+```bash
+docker ps
+```
+
+### Acceso al API containerizada
+
+Una vez que el contenedor esté ejecutándose, el API estará disponible en:
+
+- **Endpoint base**: `http://localhost:8000`
+- **Documentación Swagger**: `http://localhost:8000/docs`
+- **Documentación ReDoc**: `http://localhost:8000/redoc`
+- **Health check**: `http://localhost:8000/health`
+
+### Probar el API containerizada
+
+**Verificar estado del servicio:**
+```bash
+curl http://localhost:8000/health
+```
+
+**Realizar predicción de prueba:**
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d @test_data.json
+```
+
+**Verificar información del modelo cargado:**
+```bash
+curl http://localhost:8000/model_info
+```
+
+### Comandos útiles de Docker
+
+**Ver logs del contenedor:**
+```bash
+docker logs music-emotion-container
+```
+
+**Acceder al contenedor (debug):**
+```bash
+docker exec -it music-emotion-container /bin/bash
+```
+
+**Explorar datos de MLflow dentro del contenedor:**
+```bash
+docker exec -it music-emotion-container ls -la /app/mlruns
+```
+
+**Detener el contenedor:**
+```bash
+docker stop music-emotion-container
+```
+
+**Eliminar el contenedor (los datos de MLflow se mantienen en el volumen):**
+```bash
+docker rm music-emotion-container
+```
+
+**Eliminar la imagen:**
+```bash
+docker rmi music-emotion-api
+```
+
+**Eliminar el volumen de datos (¡CUIDADO: esto borra todos los modelos y experimentos!):**
+```bash
+docker volume rm mlruns_data
+```
+
+
+---
