@@ -551,18 +551,6 @@ Una vez que el contenedor esté ejecutándose, el API estará disponible en:
 curl http://localhost:8000/health
 ```
 
-**Realizar predicción de prueba:**
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d @test_data.json
-```
-
-**Verificar información del modelo cargado:**
-```bash
-curl http://localhost:8000/model_info
-```
-
 ### Comandos útiles de Docker
 
 **Ver logs del contenedor:**
@@ -600,5 +588,25 @@ docker rmi music-emotion-api
 docker volume rm mlruns_data
 ```
 
+### Cómo usar la imagen desde DockerHub:
+
+Cualquier persona con acceso a Docker puede correr tu API completa (con el modelo entrenado dentro) usando un solo comando, sin necesidad de clonar tu repositorio:
+
+```bash
+docker run -d \
+  -p 8080:8000 \
+  --name music-api-container \
+  -v mlruns_data:/app/mlruns \
+  [TU_USUARIO_DOCKERHUB]/music-emotion-tec-equipo03:latest
+```
+
+Este comando descargará automáticamente la imagen desde DockerHub si no la encuentra localmente y la ejecutará.
+
+**Explicación de los tags en ContainerHub para este proyecto**
+
+La convención por cada tag es de cada nueva versión se utilizará el último dígito de la versión.
+Siendo 1.1.0 la primera versión pública y cada iteración aumentará el último dígito. 
+- `latest`: última versión estable
+- `1.1.0`: versión específica
 
 ---
