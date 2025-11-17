@@ -590,7 +590,7 @@ docker volume rm mlruns_data
 
 ### Cómo usar la imagen desde DockerHub:
 
-Cualquier persona con acceso a Docker puede correr tu API completa (con el modelo entrenado dentro) usando un solo comando, sin necesidad de clonar tu repositorio:
+Cualquier persona con acceso a Docker puede usar este proyecto (con el modelo entrenado dentro) usando un solo comando, sin necesidad de clonar el repositorio:
 
 ```bash
 docker run -d \
