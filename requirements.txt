@@ -1,6 +1,6 @@
 # MLflow y tracking
 mlflow==2.21.0
-alembic==1.15.4
+alembic==1.15.2
 sqlalchemy==2.0.37
 
 # Machine Learning
